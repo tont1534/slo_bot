@@ -27,7 +27,13 @@ SOLUTIONS = {
                   "Решение:\n1. Сообщите механикам о поломке.\n"
                   "2. Используйте резервный ГПУ, если он доступен.\n"
                   "3. Если резервного ГПУ нет, подключите самолет к аэродромной сети питания.\n"
-                  "4. Убедитесь, что самолет функционирует корректно после подключения."
+                  "4. Убедитесь, что самолет функционирует корректно после подключения.",
+                  
+    "fuckup": "Ситуация: Отъебнуло всё(резервы под резервы тоже!).\n\n"
+                  "Решений особо нет(только молиться):\n1. Сообщите ЧВР о поломке.\n"
+                  "2. Получите устные пиздюли.\n"
+                  "3. Если резервного резерва нет, подключите самолет к своей жопе.\n"
+                  "4. Убедитесь, что самолет функционирует корректно после подключения."    
 }
 
 # Функция для начала работы с ботом
@@ -35,7 +41,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     keyboard = [
         [InlineKeyboardButton("Сломался самолет", callback_data="broken_plane")],
         [InlineKeyboardButton("Не приехал трап", callback_data="no_boarding_bridge")],
-        [InlineKeyboardButton("Сломался ГПУ", callback_data="broken_gpu")]
+        [InlineKeyboardButton("Сломался ГПУ", callback_data="broken_gpu")],
+        [InlineKeyboardButton("Полный пиздец", callback_data="fuckup")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text("Выберите проблему:", reply_markup=reply_markup)
