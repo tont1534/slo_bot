@@ -1,6 +1,6 @@
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
-import nest_asyncio
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup # type: ignore
+from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes # type: ignore
+import nest_asyncio # type: ignore
 import asyncio
 
 # Активируем nest_asyncio
