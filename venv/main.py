@@ -68,7 +68,7 @@ def search_database(keyword):
 
     query = """
     SELECT * FROM airplanes
-    WHERE ТИП ВС LIKE ? OR МАССА LIKE ? OR РАСХОД LIKE ? 
+    WHERE ТИП LIKE ? OR МАССА LIKE ? OR РАСХОД LIKE ? 
     """
     cursor.execute(query, (f'%{keyword}%', f'%{keyword}%', f'%{keyword}%'))
 
@@ -113,7 +113,7 @@ async def search(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if results:
         response = "Результаты поиска:\n"
         for row in results:
-            response += f"ТИП ВС: {row[0]}, МАССА: {row[1]}, РАСХОД: {row[2]}\n"
+            response += f"ТИП: {row[0]}, МАССА: {row[1]}, РАСХОД: {row[2]}\n"
     else:
         response = "По вашему запросу ничего не найдено."
 
@@ -126,22 +126,22 @@ async def keywords(update: Update, context: ContextTypes.DEFAULT_TYPE):
     cursor = conn.cursor()
 
     # Получаем уникальные значения из каждого столбца
-    cursor.execute("SELECT DISTINCT ТИП ВС FROM airplanes")
+    cursor.execute("SELECT DISTINCT ТИП FROM airplanes")
     models = [row[0] for row in cursor.fetchall()]
 
     cursor.execute("SELECT DISTINCT МАССА FROM airplanes")
-    heights = [str(row[0]) for row in cursor.fetchall()]
+    weight = [str(row[0]) for row in cursor.fetchall()]
 
     cursor.execute("SELECT DISTINCT РАСХОД FROM airplanes")
-    seats = [str(row[0]) for row in cursor.fetchall()]
+    fuel = [str(row[0]) for row in cursor.fetchall()]
 
     conn.close()
 
     response = (
         "Доступные ключевые слова:\n"
         f"ТИПЫ ВС: {', '.join(models)}\n"
-        f"МАССА ВС: {', '.join(heights)}\n"
-        f"РАСХОД: {', '.join(seats)}"
+        f"МАССА ВС: {', '.join(weight)}\n"
+        f"РАСХОД: {', '.join(fuel)}"
     )
     await update.message.reply_text(response)
     
